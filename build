@@ -10,12 +10,11 @@ command = sys.argv[1] if len(sys.argv) > 1 else 'graphic'
 
 src = [
 	'main.cc',
-	'hello_window.cc',
-	'glad.c'
+	'hello_window.cc'
 ]
 
 if command == 'graphic':
-	shell('x86_64-w64-mingw32-c++-posix -std=c++17 -Iinclude {} -Llib -lglfw3 -lgdi32 -static-libstdc++ -static -lpthread -o graphic'.format(' '.join(src)))
+	shell('x86_64-w64-mingw32-g++-posix -std=c++17 -Iinclude {} -Llib -lglad -lglfw3 -lgdi32 -static-libstdc++ -static -lpthread -o graphic'.format(' '.join(src)))
 	try:
 		os.renames('graphic.exe', 'graphic')
 	except:
