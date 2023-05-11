@@ -10,15 +10,29 @@ command = sys.argv[1] if len(sys.argv) > 1 else 'graphic'
 
 src = [
 	'main.cc',
-	'hello_window.cc'
+	'hello_window.cc',
+	'hello_triangle.cc'
 ]
 
+obj = ['{}.o'.format(os.path.splitext(x)[0]) for x in src]
+
 if command == 'graphic':
-	shell('x86_64-w64-mingw32-g++-posix -std=c++17 -Iinclude {} -Llib -lglad -lglfw3 -lgdi32 -static-libstdc++ -static -lpthread -o graphic'.format(' '.join(src)))
-	try:
-		os.renames('graphic.exe', 'graphic')
-	except:
-		pass
+	build_age = os.path.getmtime('build')
+	old = False
+	for (s, o) in zip(src, obj):
+		s_age = os.path.getmtime(s)
+		o_age = os.path.getmtime(o)
+		if not os.path.isfile(o) or s_age > o_age or build_age > o_age:
+			old = True
+			shell('x86_64-w64-mingw32-g++-posix -std=c++17 -Iinclude -c -o {} {}'.format(o, s))
+	if (old):
+		shell('x86_64-w64-mingw32-g++-posix {} -Llib -lglad -lglfw3 -lgdi32 -static-libstdc++ -static -lpthread -o graphic'.format(' '.join(obj)))
+		try:
+			os.renames('graphic.exe', 'graphic')
+		except:
+			pass
+	else:
+		print('up to date.')
 
 if command == 'compile':
 	cwd = os.getcwd()
@@ -35,6 +49,7 @@ if command == 'compile':
 	print(compile)
 
 if command == 'clean':
+	shell('rm -f {}'.format(' '.join(obj)))
 	shell('rm -f graphic')
 
 if command == 'reset':
