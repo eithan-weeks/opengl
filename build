@@ -14,13 +14,15 @@ src = [
 	'hello_window.cc',
 	'hello_triangle.cc',
 	'shaders.cc',
-	'textures.cc'
+	'textures.cc',
+	'transformations.cc'
 ]
 
 depend = {
 	'shader.cc': ['shader.hh'],
 	'shaders.cc': ['shader.hh'],
-	'textures.cc': ['shader.hh']
+	'textures.cc': ['shader.hh'],
+	'transformations.cc': ['shader.hh']
 }
 depend = {key: depend[key] if key in depend else [] for key in src}
 depend = {key: ['build'] + val for key, val in depend.items()}

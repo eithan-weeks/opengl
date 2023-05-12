@@ -24,9 +24,9 @@ int textures() {
 
 	glViewport(0, 0, 1440, 1080);
 	glfwSetFramebufferSizeCallback(window, [](GLFWwindow* window, int width, int height) {
-		glViewport(0, 0, 1440, 1080);
+		glViewport(0, 0, width, height);
 	});
-	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancoe, int action, int mods) {
+	glfwSetKeyCallback(window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
 	});
