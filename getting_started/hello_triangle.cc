@@ -2,7 +2,11 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-int hello_triangle() {
+namespace getting_started {
+	int hello_triangle();
+}
+
+int getting_started::hello_triangle() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

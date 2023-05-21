@@ -10,21 +10,25 @@ command = sys.argv[1] if len(sys.argv) > 1 else 'graphic'
 
 src = [
 	'shader.cc',
+	'camera.cc',
 	'main.cc',
-	'hello_window.cc',
-	'hello_triangle.cc',
-	'shaders.cc',
-	'textures.cc',
-	'transformations.cc',
-	'coordinate_systems.cc'
+	'getting_started/hello_window.cc',
+	'getting_started/hello_triangle.cc',
+	'getting_started/shaders.cc',
+	'getting_started/textures.cc',
+	'getting_started/transformations.cc',
+	'getting_started/coordinate_systems.cc',
+	'getting_started/camera.cc'
 ]
 
 depend = {
-	'shader.cc': ['shader.hh'],
-	'shaders.cc': ['shader.hh'],
-	'textures.cc': ['shader.hh'],
-	'transformations.cc': ['shader.hh'],
-	'coordinate_systems.cc': ['shader.hh']
+	'shader.cc'                            : ['shader.hh'],
+	'camera.cc'                            : ['camera.hh'],
+	'getting_started/shaders.cc'           : ['shader.hh'],
+	'getting_started/textures.cc'          : ['shader.hh'],
+	'getting_started/transformations.cc'   : ['shader.hh'],
+	'getting_started/coordinate_systems.cc': ['shader.hh'],
+	'getting_started/camera.cc'            : ['shader.hh', 'camera.cc']
 }
 depend = {key: depend[key] if key in depend else [] for key in src}
 depend = {key: ['build'] + val for key, val in depend.items()}
@@ -56,7 +60,7 @@ if command == 'compile':
 	for file in src:
 		compile.append({
 			'directory': cwd,
-			'arguments': ['-std=c++17', '-Iinclude'],
+			'arguments': ['dummy', '-std=c++17', '-Iinclude'],
 			'file': file
 		})
 	compile = json.dumps(compile, indent='\t')

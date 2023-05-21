@@ -1,8 +1,7 @@
 #ifndef SHADER_HH
 #define SHADER_HH
 
-class shader {
-public:
+struct shader {
 	unsigned int id;
 
 	shader(char const*, const char*);

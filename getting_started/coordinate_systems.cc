@@ -4,12 +4,16 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "shader.hh"
+#include "../shader.hh"
 
-float win_w;
-float win_h;
+namespace getting_started {
+	int coordinate_systems();
+}
 
-int coordinate_systems() {
+static float win_w;
+static float win_h;
+
+int getting_started::coordinate_systems() {
 	struct glfw {
 		glfw() { glfwInit(); };
 		~glfw() { glfwTerminate(); };
@@ -54,7 +58,7 @@ int coordinate_systems() {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		int width, height, nrChannels;
-		unsigned char * data {stbi_load("container.jpg", &width, &height, &nrChannels, 0)};
+		unsigned char * data {stbi_load("getting_started/container.jpg", &width, &height, &nrChannels, 0)};
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -71,7 +75,7 @@ int coordinate_systems() {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		int width, height, nrChannels;
-		unsigned char * data {stbi_load("awesomeface.png", &width, &height, &nrChannels, 0)};
+		unsigned char * data {stbi_load("getting_started/awesomeface.png", &width, &height, &nrChannels, 0)};
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -79,7 +83,7 @@ int coordinate_systems() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	shader ourShader {"coordinate_systems.vert", "coordinate_systems.frag"};
+	shader ourShader {"getting_started/coordinate_systems.vert", "getting_started/coordinate_systems.frag"};
 	unsigned int modelLoc;
 	unsigned int viewLoc;
 	unsigned int projectionLoc;
@@ -141,7 +145,7 @@ int coordinate_systems() {
 
 		glGenBuffers(1, &VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glad_glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 

@@ -1,9 +1,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <cmath>
-#include "shader.hh"
+#include "../shader.hh"
 
-int shaders() {
+namespace getting_started {
+	int shaders();
+}
+
+int getting_started::shaders() {
 	struct glfw_handle_t {
 		glfw_handle_t() { glfwInit(); };
 		~glfw_handle_t() { glfwTerminate(); };
@@ -30,7 +34,7 @@ int shaders() {
 			glfwSetWindowShouldClose(window, true);
 	});
 
-	shader ourShader {"shaders.vert", "shaders.frag"};
+	shader ourShader {"getting_started/shaders.vert", "getting_started/shaders.frag"};
 
 	float vertices[] {
 		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f,

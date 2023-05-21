@@ -2,10 +2,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-void framebuffer_size_callback(GLFWwindow*, int, int);
-void processInput(GLFWwindow*);
+namespace getting_started {
+	int hello_window();
+};
 
-int hello_window() {
+static void framebuffer_size_callback(GLFWwindow*, int, int);
+static void processInput(GLFWwindow*);
+
+int getting_started::hello_window() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -42,11 +46,11 @@ int hello_window() {
 	return 0;
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-void processInput(GLFWwindow *window) {
+static void processInput(GLFWwindow *window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 }

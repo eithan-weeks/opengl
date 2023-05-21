@@ -6,9 +6,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <cmath>
-#include "shader.hh"
+#include "../shader.hh"
 
-int transformations() {
+namespace getting_started {
+	int transformations();
+}
+
+int getting_started::transformations() {
 	struct glfw {
 		glfw() { glfwInit(); };
 		~glfw() { glfwTerminate(); };
@@ -47,7 +51,7 @@ int transformations() {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		int width, height, nrChannels;
-		unsigned char * data {stbi_load("container.jpg", &width, &height, &nrChannels, 0)};
+		unsigned char * data {stbi_load("getting_started/container.jpg", &width, &height, &nrChannels, 0)};
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -67,7 +71,7 @@ int transformations() {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		int width, height, nrChannels;
-		unsigned char * data {stbi_load("awesomeface.png", &width, &height, &nrChannels, 0)};
+		unsigned char * data {stbi_load("getting_started/awesomeface.png", &width, &height, &nrChannels, 0)};
 		if (data) {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -78,7 +82,7 @@ int transformations() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
-	shader ourShader {"transformations.vert", "transformations.frag"};
+	shader ourShader {"getting_started/transformations.vert", "getting_started/transformations.frag"};
 	unsigned int transformLoc;
 	{
 		ourShader.use();
@@ -123,7 +127,7 @@ int transformations() {
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(0 * sizeof(float)));
 		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(3 * sizeof(float)));
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), reinterpret_cast<void*>(6 * sizeof(float)));
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
